@@ -28,6 +28,7 @@ wsServer.on('request', function (request) {
     // This is the most important callback for us, we'll handle
     // all messages from users here.
     connection.on('message', function (message) {
+        var _a;
         console.log("message received", message);
         if (message.type === 'utf8') {
             const messageData = JSON.parse(message.utf8Data);
@@ -45,7 +46,7 @@ wsServer.on('request', function (request) {
             }
             if (messageData.hasOwnProperty("code")) {
                 console.log(clients[index].nickname + " wants to join game " + messageData.code);
-                games.get(messageData.code).players.push(clients[index]);
+                (_a = games.get(messageData.code)) === null || _a === void 0 ? void 0 : _a.players.push(clients[index]);
             }
         }
     });
@@ -67,7 +68,7 @@ function updatePlayerNames() {
     }
 }
 function generateGameCode() {
-    return games.size + 1;
+    return (games.size + 1).toString();
 }
 function generateLobby(code, player) {
     return {
