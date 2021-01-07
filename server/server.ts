@@ -53,7 +53,7 @@ wsServer.on('request', function(request) {
 			}
 			if (messageData.hasOwnProperty("code")) {
 				console.log(clients[index].nickname + " wants to join game " + messageData.code);
-				games.get(messageData.code).players.push(clients[index]);
+				games.get(messageData.code)?.players.push(clients[index]);
 			}
 		}
 	});
@@ -77,8 +77,8 @@ function updatePlayerNames() {
 	}
 }
 
-function generateGameCode() {
-	return games.size + 1;
+function generateGameCode(): string {
+	return (games.size + 1).toString();
 }
 
 function generateLobby(code, player) {
