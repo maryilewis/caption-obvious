@@ -2,7 +2,7 @@
 	"name": "caption-obvious-client",
 	"version": "0.0.1",
 	"repository": "https://github.com/maryilewis/caption-obvious",
-	"description": "",
+	"description": "client for game",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",

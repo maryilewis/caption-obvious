@@ -10,7 +10,7 @@ server.listen(1337, function() {
 });
 
 // create the server
-wsServer = new WebSocketServer({
+const wsServer = new WebSocketServer({
 	httpServer: server
 });
 	
@@ -53,7 +53,7 @@ wsServer.on('request', function(request) {
 			}
 			if (messageData.hasOwnProperty("code")) {
 				console.log(clients[index].nickname + " wants to join game " + messageData.code);
-				games.get(code).players.push(clients[index]);
+				games.get(messageData.code).players.push(clients[index]);
 			}
 		}
 	});
