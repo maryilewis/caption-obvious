@@ -1,6 +1,8 @@
 {
-	"name": "caption-obvious",
-	"version": "0.0.0",
+	"name": "caption-obvious-client",
+	"version": "0.0.1",
+	"repository": "https://github.com/maryilewis/caption-obvious",
+	"description": "",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
