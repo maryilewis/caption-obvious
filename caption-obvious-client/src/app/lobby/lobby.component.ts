@@ -1,25 +1,24 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subject } from "rxjs";
-import { WebSocketService } from "../websocket/websocket.service";
+import { Observable, Subject } from "rxjs";
+import { map, tap } from "rxjs/operators";
+import { DataService } from "../services/data.service";
 
 @Component({
 	selector: "app-lobby",
 	templateUrl: "./lobby.component.html",
 	styleUrls: ["./lobby.component.scss"],
 })
-export class LobbyComponent implements OnInit, OnDestroy {
-	constructor(private ws: WebSocketService) {}
-	get players(): string[] {
-		return this._players;
-	}
-	destroyed$ = new Subject();
-	private _players: string[] = [];
-	ngOnInit(): void {
-		this.ws.players$.subscribe(players => {
-			this._players = players;
-		});
-	}
-	ngOnDestroy() {
-		this.destroyed$.next();
+export class LobbyComponent implements OnInit {
+	messages$: Observable<any[]>;
+	users$: Observable<any[]>;
+
+	constructor(private data: DataService) {}
+
+	ngOnInit() {
+		// get users from data service
+		this.users$ = this.data.users$().pipe(
+			// our data is paginated, so map to .data
+			map((users: any) => users.data.map(data => data.nickname))
+		);
 	}
 }
